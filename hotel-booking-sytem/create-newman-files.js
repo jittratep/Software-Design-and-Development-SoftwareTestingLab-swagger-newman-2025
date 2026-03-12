@@ -51,6 +51,10 @@ const collection = {
         '});',
         'pm.test("Response time is less than 2000ms", function() {',
         '  pm.expect(pm.response.responseTime).to.be.below(2000);',
+        '});',
+        'pm.test("user.id is a positive number", function() {',
+        '  const d = pm.response.json();',
+        '  pm.expect(d.user.id).to.be.a("number").and.above(0);',
         '});'
       ]}}],
       request: {
@@ -82,7 +86,7 @@ const collection = {
         body: {
           mode: 'raw',
           raw: JSON.stringify({
-            fullname: 'นักศึกษา ทดสอบ Newman', email: 'newman@test.com',
+            fullname: 'จิตรเทพ พะชำนิ', email: '68030040@kmitl.ac.th',
             phone: '0812345678', checkin: '2026-12-01', checkout: '2026-12-03',
             roomtype: 'standard', guests: 2
           })

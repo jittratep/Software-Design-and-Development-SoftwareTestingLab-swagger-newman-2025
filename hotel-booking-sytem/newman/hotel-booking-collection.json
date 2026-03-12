@@ -26,6 +26,10 @@
               "});",
               "pm.test(\"Response time is less than 2000ms\", function() {",
               "  pm.expect(pm.response.responseTime).to.be.below(2000);",
+              "});",
+              "pm.test(\"user.id is a positive number\", function() {",
+              "  const d = pm.response.json();",
+              "  pm.expect(d.user.id).to.be.a(\"number\").and.above(0);",
               "});"
             ]
           }
@@ -87,7 +91,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"fullname\":\"นักศึกษา ทดสอบ Newman\",\"email\":\"newman@test.com\",\"phone\":\"0812345678\",\"checkin\":\"2026-12-01\",\"checkout\":\"2026-12-03\",\"roomtype\":\"standard\",\"guests\":2}"
+          "raw": "{\"fullname\":\"จิตรเทพ พะชำนิ\",\"email\":\"68030040@kmitl.ac.th\",\"phone\":\"0812345678\",\"checkin\":\"2026-12-01\",\"checkout\":\"2026-12-03\",\"roomtype\":\"standard\",\"guests\":2}"
         },
         "url": {
           "raw": "{{baseUrl}}/api/bookings",
