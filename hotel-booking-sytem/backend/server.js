@@ -206,6 +206,31 @@ app.post('/api/bookings', (req, res) => {
   });
 });
 
+
+/**
+ * @swagger
+ * /api/bookings:
+ *   get:
+ *     summary: ดึงข้อมูลการจองทั้งหมด
+ *     description: ต้องการ JWT Token — กด Authorize ที่มุมบนขวาก่อนทดลองใช้
+ *     tags: [Bookings]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: รายการการจองทั้งหมด เรียงจากใหม่ไปเก่า
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Booking'
+ *       401:
+ *         description: ไม่ได้ส่ง Token
+ *       403:
+ *         description: Token ไม่ถูกต้องหรือหมดอายุ
+ */
+
 // GET /api/bookings — ดึงข้อมูลทั้งหมด (ต้อง login)
 app.get('/api/bookings', authenticateToken, (req, res) => {
   db.all('SELECT * FROM bookings ORDER BY created_at DESC', [], (err, rows) => {
