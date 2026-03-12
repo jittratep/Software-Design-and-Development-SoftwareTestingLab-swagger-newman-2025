@@ -1259,7 +1259,7 @@ Assertions หลังเพิ่ม : 19
 }
 ```
 
-📸 แทรกภาพหน้าจอ Newman ที่แสดง Request 8 ผ่าน (Pass):
+![📸 แทรกภาพหน้าจอ Newman ที่แสดง Request 8 ผ่าน (Pass):](images-Swagger_Newman/image-newman-new-request.png)
 
 > ___
 

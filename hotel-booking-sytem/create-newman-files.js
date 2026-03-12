@@ -231,6 +231,26 @@ const collection = {
           host: ['{{baseUrl}}'], path: ['api', 'bookings', '{{bookingId}}']
         }
       }
+    },
+
+    {
+      name: '8. POST /api/login — Wrong Password',
+      event: [{ listen: 'test', script: { type: 'text/javascript', exec: [
+        // เขียน pm.test() ตรวจสอบ Status 401 และ error message ที่นี่
+        'pm.test("Status code is 401 Unauthorized", function() {',
+        '  pm.response.to.have.status(401);',
+        '});',
+        'pm.test("Response has error message", function() {',
+        '  const d = pm.response.json();',
+        '  pm.expect(d).to.have.property("error");',
+        '});'
+      ]}}],
+      request: {
+        method: 'POST',
+        header: [{ key: 'Content-Type', value: 'application/json' }],
+        body: { mode: 'raw', raw: JSON.stringify({ username: 'admin', password: 'wrongpassword' }) },
+        url: { raw: '{{baseUrl}}/api/login', host: ['{{baseUrl}}'], path: ['api', 'login'] }
+      }
     }
   ]
 };
