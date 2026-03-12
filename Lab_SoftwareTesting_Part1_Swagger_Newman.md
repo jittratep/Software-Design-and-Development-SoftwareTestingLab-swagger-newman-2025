@@ -1388,13 +1388,55 @@ Assertions หลังเพิ่ม : 19
     });
     ```
    ![alt text](images-Swagger_Newman/image-test-2.png)
-   
+
 3. สร้าง API เพิ่มเติม เพื่อรองรับการ ConfirmCheckOut (เพิ่ม Comment ใน Code ให้ใส่ชื่อ และรหัสนักศึกษาเพื่อระบุว่าแก้ไขโดยใคร)
 
-   ```
-   บันทึก Code และ รูปผลการทำงาน
-   ```
-      
+    ```js
+    /**
+     * @swagger
+    * /api/bookings/{id}/confirm-checkout:
+    *   post:
+    *     summary: ยืนยันการเช็คเอาท์ (Confirm Check-Out)
+    *     description: "API สำหรับยืนยันการเช็คเอาท์ขั้นตอนสุดท้าย (แก้ไขโดย: จิตรเทพ พะชำนิ รหัสนักศึกษา: 68030040)"
+    *     tags:
+    *       - Bookings
+    *     security:
+    *       - bearerAuth: []
+    *     parameters:
+    *       - in: path
+    *         name: id
+    *         required: true
+    *         schema:
+    *           type: integer
+    *         description: ID ของการจองที่ต้องการยืนยันการ Check-Out
+    *     responses:
+    *       200:
+    *         description: ยืนยันสำเร็จ
+    *         content:
+    *           application/json:
+    *             schema:
+    *               type: object
+    *               properties:
+    *                 message:
+    *                   type: string
+    *                   example: "Checkout confirmed successfully"
+    *                 finalStatus:
+    *                   type: string
+    *                   example: "closed"
+    */
+
+    app.post('/api/bookings/:id/confirm-checkout', authenticateToken, (req, res) => {
+      const bookingId = req.params.id;
+      res.status(200).json({
+        message: "Checkout confirmed successfully",
+        bookingId: bookingId,
+        finalStatus: "closed",
+        confirmedAt: new Date().toISOString()
+      });
+    });
+    ```
+    ![alt text](images-Swagger_Newman/image-test-3.png)
+    
 4. แก้ไข Swagger และ Newman เพื่อทดสอบการทำงาน
    ```
    บันทึกรูปผลการทำงานของ Swagger
